@@ -1,14 +1,15 @@
 #include<bits/stdc++.h>
+using namespace std;
 
 class Logger {
 private:
-    std::ofstream logFile;
+    ofstream logFile;
 
 public:
-    Logger(const std::string &filename) {
-        logFile.open(filename.c_str(), std::ios::out | std::ios::app);
+    Logger(const string &filename) {
+        logFile.open(filename.c_str(), ios::out | ios::app);
         if (!logFile.is_open()) {
-            std::cerr << "Cannot open log file: " << filename << std::endl;
+            cerr << "Cannot open log file: " << filename << endl;
         }
     }
 
@@ -18,26 +19,26 @@ public:
         }
     }
 
-    void log(const std::string &message) {
+    void log(const string &message) {
         logMessage("LOG", message);
     }
 
-    void debug(const std::string &message) {
+    void debug(const string &message) {
         logMessage("DEBUG", message);
     }
 
 private:
-    void logMessage(const std::string &level, const std::string &message) {
+    void logMessage(const string &level, const string &message) {
         if (logFile.is_open()) {
-            time_t currentTime = std::time(nullptr);
-            tm *timeInfo = std::localtime(&currentTime);
+            time_t currentTime = time(nullptr);
+            tm *timeInfo = localtime(&currentTime);
 
             char timeString[20];
             strftime(timeString, sizeof(timeString), "%Y-%m-%d %H:%M:%S", timeInfo);
 
-            logFile << "[" << level << "][" << timeString << "] " << message << std::endl;
+            logFile << "[" << level << "][" << timeString << "] " << message << endl;
 
-            std::cout << "[" << level << "][" << timeString << "] " << message << std::endl;
+            cout << "[" << level << "][" << timeString << "] " << message << endl;
         }
     }
 };
@@ -46,13 +47,13 @@ class Matrix {
 public:
     int rows;
     int cols;
-    std::vector<std::vector<int>> data;
+    vector<vector<int>> data;
 
-    Matrix(int rows, int cols) : rows(rows), cols(cols), data(rows, std::vector<int>(cols, 0)) {}
+    Matrix(int rows, int cols) : rows(rows), cols(cols), data(rows, vector<int>(cols, 0)) {}
 
     Matrix operator+(const Matrix &other) const {
         if (rows != other.rows || cols != other.cols) {
-            throw std::runtime_error("Matrix dimensions do not match for addition.");
+            throw runtime_error("Matrix dimensions do not match for addition.");
         }
 
         Matrix result(rows, cols);
@@ -68,7 +69,7 @@ public:
 
     Matrix operator-(const Matrix &other) const {
         if (rows != other.rows || cols != other.cols) {
-            throw std::runtime_error("Matrix dimensions do not match for subtraction.");
+            throw runtime_error("Matrix dimensions do not match for subtraction.");
         }
 
         Matrix result(rows, cols);
@@ -84,7 +85,7 @@ public:
 
     Matrix operator*(const Matrix &other) const {
         if (cols != other.rows) {
-            throw std::runtime_error("Matrix dimensions do not match for multiplication.");
+            throw runtime_error("Matrix dimensions do not match for multiplication.");
         }
 
         Matrix result(rows, other.cols);
@@ -102,7 +103,7 @@ public:
 
     Matrix operator/(int divisor) const {
         if (divisor == 0) {
-            throw std::runtime_error("Matrix division by zero.");
+            throw runtime_error("Matrix division by zero.");
         }
 
         Matrix result(rows, cols);
@@ -142,8 +143,8 @@ int main() {
         logger.log("Matrix Division Result:");
 
 
-    } catch (const std::exception &e) {
-        logger.log("Exception caught: " + std::string(e.what()));
+    } catch (const exception &e) {
+        logger.log("Exception caught: " + string(e.what()));
     }
 
     return 0;
