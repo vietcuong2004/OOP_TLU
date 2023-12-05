@@ -27,6 +27,10 @@ public:
         logMessage("DEBUG", message);
     }
 
+    void error(const string &message) {
+        logMessage("ERROR", message);
+    }
+
 private:
     void logMessage(const string &level, const string &message) {
         if (logFile.is_open()) {
@@ -123,10 +127,10 @@ int main() {
 
     try {
         Matrix a(2, 3);
-        Matrix b(2, 3);
+        Matrix b(2, 4);
 
         a.data = {{1, 1, 1}, {2, 2, 2}};
-        b.data = {{3, 3, 3}, {4, 4, 4}};
+        b.data = {{3, 3, 3,1}, {1,4, 4, 4}};
 
         Matrix c = a + b;
         logger.log("Matrix Addition Result:");
@@ -144,7 +148,7 @@ int main() {
 
 
     } catch (const exception &e) {
-        logger.log("Exception caught: " + string(e.what()));
+        logger.error("Exception caught: " + string(e.what()));
     }
 
     return 0;
