@@ -155,6 +155,7 @@ class QuaDua : public HoaQua{
 			HoaQua::Nhap();
 			cout << "Nhap so luong (qua): "; 
 			cin >> SoLuong; cin.ignore();
+			setThanhTien(getThanhTien());
 		}
 		void Xuat(){
 			HoaQua::Xuat();
